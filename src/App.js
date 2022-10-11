@@ -1,7 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useToast } from "./Contexts/ToastContext";
 
 function App() {
+  const { toastList } = useToast();
+
+  console.log(toastList);
+
   return (
     <div className="App">
       <header className="App-header">
