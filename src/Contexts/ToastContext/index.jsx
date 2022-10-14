@@ -4,11 +4,20 @@ const ToastContext = createContext();
 
 export const ToastProvider = ({ children }) => {
   const [toastList, setToastList] = useState([
-    { id: uuid(), message: "Deu bom!", mode: "success", time: 1000 },
+    { id: uuid(), message: "Deu bom!", mode: "success", ms: 10000 },
   ]);
 
+  const toast = (message, mode, ms) => {
+    setToastList([...toastList, { id: uuid(), message, mode, ms }]);
+  };
+
+  const removeToast = (id) => {
+    const filteredToastList = toastList.filter((toast) => toast.id !== id);
+    setToastList(filteredToastList);
+  };
+
   return (
-    <ToastContext.Provider value={{ toastList }}>
+    <ToastContext.Provider value={{ toastList, toast, removeToast }}>
       {children}
     </ToastContext.Provider>
   );

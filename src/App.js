@@ -1,29 +1,25 @@
-import logo from "./logo.svg";
-import "./App.css";
 import { useToast } from "./Contexts/ToastContext";
+import { Toast } from "./Components/Toast";
+import { FlexContainer } from "./styles/global";
 
 function App() {
-  const { toastList } = useToast();
+  const { toastList, toast } = useToast();
+
+  const addToast = (ms) => toast("Deu bom!", "success", ms);
 
   console.log(toastList);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FlexContainer>
+      <Toast />
+
+      <div style={{ position: "absolute", bottom: "100px" }}>
+        <button onClick={() => addToast(2000)}> 2 segundos</button>
+        <button onClick={() => addToast(7000)}> 7 segundos</button>
+        <button onClick={() => addToast(10000)}> 10 segundos</button>
+        <button onClick={() => addToast(15000)}> 15 segundos</button>
+      </div>
+    </FlexContainer>
   );
 }
 
